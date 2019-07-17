@@ -1,0 +1,24 @@
+#myTb {
+  .el-table {
+    tr {
+      background-color: black;
+    }
+    td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) {
+      background-color: rgb(38, 27, 39);
+    }
+    .el-table__header-wrapper {
+      .is-leaf {
+        border-bottom: none;
+      }
+      th {
+        background-color: black;
+      }
+    }
+  }
+  .el-table--enable-row-hover .el-table__body tr:hover > td {
+    background-color: gray;
+  }
+}
