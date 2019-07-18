@@ -16,21 +16,13 @@ export default {
         let obj_id = "";
         array.forEach(item => {
           if (name === item["日期"]) {
-            try {
-              if (typeof item["日期"] !== "string") {
-                throw "页面信息错误";
-              } else {
-                self.$router.push({
-                  path: "/test",
-                  query: {
-                    id: obj_id
-                  }
-                });
-              }
-            } catch (error) {
-              alert(error);
-            }
             obj_id = item.id;
+          }
+        });
+        self.$router.push({
+          path: "/test",
+          query: {
+            id: obj_id
           }
         });
       }
