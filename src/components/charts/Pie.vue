@@ -1,6 +1,12 @@
 <template>
   <div>
-    <ve-pie :data="pie_data" :loading="pie_loding" :data-empty="data_Empty" :legend="pie_legend"></ve-pie>
+    <ve-pie
+      :data="pie_data"
+      :loading="pie_loding"
+      :data-empty="data_Empty"
+      :legend="pie_legend"
+      :events="chartEvent"
+    ></ve-pie>
   </div>
 </template>
 
@@ -11,6 +17,28 @@ export default {
     pie_data: Object,
     pie_loding: Boolean,
     data_Empty: Boolean
+  },
+  data() {
+    const slef = this;
+    this.chartEvent = {
+      click(e) {
+        let name = e.name;
+        let id = "";
+        const { rows } = slef.pie_data;
+        rows.forEach(item => {
+          if (item["名称"] === name) {
+            id = item.id;
+          }
+        });
+        slef.$router.push({
+          path: "/test",
+          query: {
+            id
+          }
+        });
+      }
+    };
+    return {};
   },
   methods: {
     formatPieData(data) {
