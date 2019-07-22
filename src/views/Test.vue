@@ -10,17 +10,21 @@
       <el-date-picker
         v-model="value2"
         type="month"
+        @change="dateChange"
         placeholder="选择月"
-        @change="getDate"
-        value-format="yyyy-M"
+        value-format="yyyy-MM"
       ></el-date-picker>
+      <h5>{{newDate}}</h5>
     </div>
   </div>
 </template>
 
 <script>
+import { mathRound, dateFormat } from "../utils/util";
 export default {
   mounted() {
+    console.log(mathRound("546546465.163"));
+    console.log(newTestArr);
     this.id = this.$route.query.id;
     let obj = {
       ColHead: [
@@ -36,22 +40,50 @@ export default {
       ],
       ColId: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     };
+    let newTestArr = obj.ColHead.filter(item => {
+      if (item !== "材料费7" && item !== "材料费8") {
+        return item;
+      }
+    });
+    console.log(newTestArr);
     const { newArr, newId } = this.formatArr(obj, this.$route.query.id);
     this.options = newArr;
     this.value = newId;
-    this.value2 = "2019-3";
+    this.value2 = new Date().Format("yyyy-MM");
+    let int = parseInt(new Date().Format("yyyy-MM").split("-")[0]) - 1;
+    this.newDate = int.toString() + "-" + this.value2.split("-")[1];
   },
   data() {
     return {
       id: "",
       options: [],
       value: "",
-      value2: ""
+      value2: "",
+      newDate: ""
     };
   },
   methods: {
-    getDate(v) {
-      console.log(v);
+    dateChange(v) {
+      if (v) {
+        let int = parseInt(this.value2.split("-")[0]) - 1;
+        this.newDate = int.toString() + "-" + this.value2.split("-")[1];
+      }
+    },
+    getDate(data) {
+      api
+        .getCommonInfo(
+          Object.assign({ name: "zhang", age: "18", sex: "男" }, data)
+        )
+        .then(res => {
+          if (res.data) {
+            return res.data.charData;
+          }
+        });
+    },
+    handleChange(v) {
+      let data = this.getDate({
+        fyflkey: [`${v}`]
+      });
     },
     formatArr({ ColHead, ColId }, id = "id") {
       if (!Array.isArray(ColHead)) {
