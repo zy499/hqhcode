@@ -45,7 +45,6 @@ export default {
         return item;
       }
     });
-    console.log(newTestArr);
     const { newArr, newId } = this.formatArr(obj, this.$route.query.id);
     this.options = newArr;
     this.value = newId;
