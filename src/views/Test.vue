@@ -109,9 +109,6 @@ export default {
         }
       }
     },
-    handleChange(val) {
-      console.log(val);
-    },
     getObj(val) {}
   }
 };
