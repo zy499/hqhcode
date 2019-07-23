@@ -4,8 +4,8 @@
       :data="pie_data"
       :loading="pie_loding"
       :data-empty="data_Empty"
-      :legend="pie_legend"
       :events="chartEvent"
+      :extend="chartExtend"
     ></ve-pie>
   </div>
 </template>
@@ -36,6 +36,28 @@ export default {
             id
           }
         });
+      }
+    };
+    this.chartExtend = {
+      series(v) {
+        v.forEach((i, index) => {
+          i.radius = [30, 100];
+          i.center = ["35%", "48%"];
+          i.roseType = "radius";
+          i.data.sort((a, b) => {
+            return b["value"] - a["value"];
+          });
+          i.data.forEach((z, x) => {
+            if (x > 4) {
+              z = Object.assign(
+                z,
+                { label: { show: false } },
+                { labelLine: { show: false } }
+              );
+            }
+          });
+        });
+        return v;
       }
     };
     return {};

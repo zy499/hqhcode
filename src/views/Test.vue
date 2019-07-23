@@ -8,13 +8,14 @@
     <div class="block">
       <span class="demonstration">月</span>
       <el-date-picker
-        v-model="value2"
+        v-model="dateValue"
         type="month"
         @change="dateChange"
         placeholder="选择月"
         value-format="yyyy-MM"
       ></el-date-picker>
-      <h5>{{newDate}}</h5>
+      <h5>去年月{{lastYearDate}}</h5>
+      <h5>今年月-2 {{nowMonth}}</h5>
     </div>
   </div>
 </template>
@@ -48,24 +49,50 @@ export default {
     const { newArr, newId } = this.formatArr(obj, this.$route.query.id);
     this.options = newArr;
     this.value = newId;
-    this.value2 = new Date().Format("yyyy-MM");
-    let int = parseInt(new Date().Format("yyyy-MM").split("-")[0]) - 1;
-    this.newDate = int.toString() + "-" + this.value2.split("-")[1];
+    // this.dateValue = new Date();
+    // this.dateValue = "2019-01";
+    this.dateValue = dateFormat("yyyy-MM")
+    let yaer = parseInt(this.dateValue.split("-")[0]) - 1;
+    let month = parseInt(this.dateValue.split("-")[1]);
+    let srtMoth = parseInt(this.dateValue.split("-")[1]).toString();
+    this.lastYearDate = yaer.toString() + "-" + this.dateValue.split("-")[1];
+    if (month <= 1 && srtMoth.length < 2) {
+      this.nowMonth = yaer + "-" + "12";
+    } else if (srtMoth.length < 2) {
+      let newStrMoth = srtMoth - 1;
+      this.nowMonth = parseInt(this.dateValue.split("-")[0]) + "-" + "0" + newStrMoth;
+    } else {
+      let newStrMoth = srtMoth - 1;
+      this.nowMonth = parseInt(this.dateValue.split("-")[0]) + "-" + newStrMoth;
+    }
   },
   data() {
     return {
       id: "",
       options: [],
       value: "",
-      value2: "",
-      newDate: ""
+      dateValue: "",
+      lastYearDate: "",
+      nowMonth: ""
     };
   },
   methods: {
     dateChange(v) {
       if (v) {
-        let int = parseInt(this.value2.split("-")[0]) - 1;
-        this.newDate = int.toString() + "-" + this.value2.split("-")[1];
+        let currentYear = parseInt(v.split("-")[0]);//当前年
+        let lastYear =  parseInt(v.split("-")[0]) - 1;//上一年
+        let month = parseInt(v.split("-")[1]);//当前月
+        let srtMoth = parseInt(v.split("-")[1]).toString();// string类型
+        this.lastYearDate = lastYear.toString() + "-" + v.split("-")[1];
+        if (month <= 1 && srtMoth.length < 2) {
+          this.nowMonth = lastYear + "-" + "12";
+        } else if (srtMoth.length < 2) {
+          let newStrMoth = srtMoth - 1;
+          this.nowMonth = currentYear + "-" + "0" + newStrMoth;
+        } else {
+          let newStrMoth = srtMoth - 1;
+          this.nowMonth = currentYear + "-" + newStrMoth;
+        }
       }
     },
     getDate(data) {
@@ -108,11 +135,7 @@ export default {
           throw new Error("ColHead与ColId长度不相等");
         }
       }
-    },
-    handleChange(val) {
-      console.log(val);
-    },
-    getObj(val) {}
+    }
   }
 };
 </script>
