@@ -135,12 +135,7 @@ export default {
           throw new Error("ColHead与ColId长度不相等");
         }
       }
-<<<<<<< HEAD
     }
-=======
-    },
-    getObj(val) {}
->>>>>>> eb3f46eedadd30f9e40b0aa98faa8b620fad1f4c
   }
 };
 </script>
