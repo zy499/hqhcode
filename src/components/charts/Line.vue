@@ -22,12 +22,11 @@ export default {
           // console.log(slef.line_data,params)
         }
         return v
+      },
+      legend(v) {
+        v.data.splice(2,1)
+        return v
       }
-      // tooltip:{
-      //   formatter:function(params) {
-      //     console.log(params)
-      //   }
-      // }
     }
     return {
       

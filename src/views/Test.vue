@@ -24,8 +24,7 @@
 import { mathRound, dateFormat } from "../utils/util";
 export default {
   mounted() {
-    console.log(mathRound("546546465.163"));
-    console.log(newTestArr);
+    console.log(parseInt('22%'));
     this.id = this.$route.query.id;
     let obj = {
       ColHead: [
