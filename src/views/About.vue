@@ -1,24 +1,24 @@
 <template>
   <div class="about">
-    <!-- <Pie :pie_data="pie_chartData" :pie_loding="pieLonding" :data_Empty="data_Empty" /> -->
+    <Pie :pie_data="pie_chartData" :pie_loding="pieLonding" :data_Empty="data_Empty" />
     <!-- <Line_chart :line_data="Line_chartData" /> -->
     <!-- <Histogram :histogram_data="histogram_chartData" /> -->
-    <div id="myTb">
+    <!-- <div id="myTb">
       <el-table :data="tableData" :stripe="false" style="width: 50%;">
         <el-table-column prop="科室" label="科室" width="180"></el-table-column>
         <el-table-column prop="总收入" label="总收入" width="180"></el-table-column>
         <el-table-column prop="同比收入" label="同比收入" width="180">
           <template slot-scope="scope">
-            <span style="margin-left:10px;">{{parseInt((scope.row['同比收入']/10000)*100)/100 + '万元'}}</span>
-            <i  v-if="parseInt((scope.row['同比收入']/10000)*100)/100 > 0" class="el-icon-top" style="color:red"></i>
-            <i v-else class="el-icon-bottom" style="color:green"></i>
+            <span style="margin-left:10px;">{{parseInt((scope.row['同比收入']/10000)*100)/100 + '万元'}}</span> -->
+            <!-- <i  v-if="parseInt((scope.row['同比收入']/10000)*100)/100 > 0" class="el-icon-top" style="color:red"></i>
+            <i v-else class="el-icon-bottom" style="color:green"></i> -->
             <!-- <i :class="parseInt((scope.row['同比收入']/10000)*100)/100 > 0 ? 'el-icon-top' : 'el-icon-bottom'" :style="parseInt((scope.row['同比收入']/10000)*100)/100 > 0 ? 'color:red;' : 'color:green;'"></i> -->
-            <span style="margin-left:10px;" v-html="parseInt((scope.row.同比收入 /10000)*100)/100 > 0 ? '<i class=\'el-icon-top\' style=\'color:red;\'></i>' : '<i class=\'el-icon-bottom\' style=\'color:green;\'></i>'"></span>
+            <!-- <span style="margin-left:10px;" v-html="parseInt((scope.row.同比收入 /10000)*100)/100 > 0 ? '<i class=\'el-icon-top\' style=\'color:red;\'></i>' : '<i class=\'el-icon-bottom\' style=\'color:green;\'></i>'"></span>
           </template>
         </el-table-column>
         <el-table-column prop="环比收入" label="环比收入"></el-table-column>
       </el-table>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -56,7 +56,7 @@ export default {
         {
           科室: "内科",
           总收入: "40099037",
-          同比收入: "342350934",
+          同比收入: "-342350934",
           环比收入: "346456456"
         },
         {

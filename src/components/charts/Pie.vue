@@ -6,6 +6,7 @@
       :data-empty="data_Empty"
       :events="chartEvent"
       :extend="chartExtend"
+      :legend="legend"
     ></ve-pie>
   </div>
 </template>
@@ -20,6 +21,18 @@ export default {
   },
   data() {
     const slef = this;
+    this.legend = {
+      type: "scroll",
+      orient: "vertical",
+      right: 10,
+      top: 20,
+      bottom: 20
+    };
+    this.tooltip = {
+      fomatter: function(params) {
+        console.log(params);
+      }
+    };
     this.chartEvent = {
       click(e) {
         let name = e.name;
@@ -51,8 +64,26 @@ export default {
             if (x > 4) {
               z = Object.assign(
                 z,
-                { label: { show: false } },
-                { labelLine: { show: false } }
+                {
+                  label: {
+                    normal: {
+                      show: false
+                    },
+                    emphasis: {
+                      show: false
+                    }
+                  }
+                },
+                {
+                  labelLine: {
+                    normal: {
+                      show: false
+                    },
+                    emphasis: {
+                      show: false
+                    }
+                  }
+                }
               );
             }
           });

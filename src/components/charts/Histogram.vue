@@ -1,11 +1,18 @@
 <template>
-  <ve-histogram :data="histogram_data" :events="chartsEvent"></ve-histogram>
+  <ve-histogram :data="histogram_data" :events="chartsEvent" ></ve-histogram>
 </template>
 
 <script>
 export default {
   props: {
     histogram_data: Object
+  },
+  mounted() {
+    let arr = this.histogram_data.rows;
+    arr.sort((a, b) => {
+      return b["下单用户"] - a["下单用户"];
+    });
+    // console.log(arr)
   },
   data() {
     const self = this;
