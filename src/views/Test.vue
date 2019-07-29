@@ -60,15 +60,15 @@ export default {
         let lastYear = parseInt(v.split("-")[0]) - 1; //上一年
         let month = parseInt(v.split("-")[1]); //当前月
         let srtMoth = parseInt(v.split("-")[1]).toString(); // string类型
-        this.lastYearDate = lastYear.toString() + "-" + v.split("-")[1];
+        this.tongbiDate = lastYear.toString() + "-" + v.split("-")[1];
         if (month <= 1 && srtMoth.length < 2) {
-          this.nowMonth = lastYear + "-" + "12";
+          this.huanbiDate = lastYear + "-" + "12";
         } else if (srtMoth.length < 2) {
           let newStrMoth = srtMoth - 1;
-          this.nowMonth = currentYear + "-" + "0" + newStrMoth;
+          this.huanbiDate = currentYear + "-" + "0" + newStrMoth;
         } else {
           let newStrMoth = srtMoth - 1;
-          this.nowMonth = currentYear + "-" + newStrMoth;
+          this.huanbiDate = currentYear + "-" + newStrMoth;
         }
       }
     },
