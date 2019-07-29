@@ -18,12 +18,49 @@ export const dateFormat = function (fmt) {
   return fmt;
 }
 
-export const  formatArr = function(arr,str = 'str'){
-  arr.sort((a,b)=>{
+export const formatArr = function (arr, str = 'str') {
+  arr.sort((a, b) => {
     return b[str] - a[str]
   })
   return arr;
 }
-// Date.prototype.Format = function (fmt) {
 
-// }
+export const getDateType = function (type) {
+  let date = dateFormat('yyyy-MM');
+  let yaer = parseInt(date.split("-")[0]); //获取上一年年份
+  let month = parseInt(date.split("-")[1]); // 获取当前月
+  let srtMoth = parseInt(date.split("-")[1]).toString();
+  if (type === '上一月') {
+    // let lastYearDate = yaer.toString() + "-" + date.split("-")[1];
+    if (month <= 1 && srtMoth.length < 2) {
+      return yaer - 1 + "-" + "12";
+    } else if (srtMoth.length < 2) {
+      let newStrMoth = srtMoth - 1;
+      return yaer + "-" + "0" + newStrMoth;
+    } else {
+      let newStrMoth = srtMoth - 1;
+      return yaer + "-" + newStrMoth;
+    }
+  } else if (type === '上一年') {
+    if (month <= 1 && srtMoth.length < 2) {
+      return yaer - 2 + "-" + "12";
+    } else if (srtMoth.length < 2) {
+      let newStrMoth = srtMoth - 1;
+      return yaer - 1 + "-" + "0" + newStrMoth;
+    } else {
+      let newStrMoth = srtMoth - 1;
+      return yaer - 1 + "-" + newStrMoth;
+    }
+  } else if (type === '上二月') {
+    if (month <= 1 && srtMoth.length < 2) {
+      return yaer - 1 + "-" + "11";
+    } else if (srtMoth.length < 2) {
+      let newStrMoth = srtMoth - 2;
+      return yaer + "-" + "0" + newStrMoth;
+    } else {
+      let newStrMoth = srtMoth - 2;
+      return yaer + "-" + newStrMoth;
+    }
+  }
+
+}
