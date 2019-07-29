@@ -1,8 +1,8 @@
 <template>
   <div class="about">
-    <Pie :pie_data="pie_chartData" :pie_loding="pieLonding" :data_Empty="data_Empty" />
+    <!-- <Pie :pie_data="pie_chartData" :pie_loding="pieLonding" :data_Empty="data_Empty" /> -->
     <!-- <Line_chart :line_data="Line_chartData" /> -->
-    <!-- <Histogram :histogram_data="histogram_chartData" /> -->
+    <Histogram :histogram_data="histogram_chartData" />
     <!-- <div id="myTb">
       <el-table :data="tableData" :stripe="false" style="width: 50%;">
         <el-table-column prop="科室" label="科室" width="180"></el-table-column>
@@ -30,9 +30,10 @@ function html2Escape(sHtml) {
 import Pie from "../components/charts/Pie";
 import Line_chart from "../components/charts/Line";
 import Histogram from "../components/charts/Histogram";
-import { setTimeout } from "timers";
+import { formatArr } from "../utils/util"
 export default {
   created() {
+    this.histogram_chartData.rows = formatArr(this.histogram_chartData.rows,'下单用户')
     let html = '<i class="el-icon-top"></i>';
     const slef = this;
     setTimeout(() => {
