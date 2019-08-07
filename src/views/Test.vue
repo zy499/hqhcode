@@ -15,12 +15,30 @@
       ></el-date-picker>
       <h5>同比{{tongbiDate}}</h5>
       <h5>环比{{huanbiDate}}</h5>
+      <swiper :options="swiperOption" ref="mySwiper">
+        <!-- slides -->
+        <swiper-slide>
+          <div style="width:100%;height:200px;background:red;">I'm Slide 1</div>
+        </swiper-slide>
+        <swiper-slide>
+          <div style="width:100%;height:200px;background:red;">I'm Slide 2</div>
+        </swiper-slide>
+        <swiper-slide>
+          <div style="width:100%;height:200px;background:red;">I'm Slide 3</div>
+        </swiper-slide>
+        <!-- Optional controls -->
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+        <div class="swiper-scrollbar" slot="scrollbar"></div>
+      </swiper>
     </div>
   </div>
 </template>
 
 <script>
 import { mathRound, dateFormat, getDateType } from "../utils/util";
+import  { swiper, swiperSlide} from 'vue-awesome-swiper'
 export default {
   mounted() {
     let obj = {
@@ -40,9 +58,18 @@ export default {
     const { newArr, newId } = this.formatArr(obj, this.$route.query.id);
     this.options = newArr;
     this.value = newId;
-    this.dateValue =  getDateType('上一月');
-    this.tongbiDate = getDateType('上一年');
-    this.huanbiDate = getDateType('上二月');
+    this.dateValue = getDateType("上一月");
+    this.tongbiDate = getDateType("上一年");
+    this.huanbiDate = getDateType("上二月");
+  },
+  components: {
+    swiper,
+    swiperSlide
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    }
   },
   data() {
     return {
@@ -50,7 +77,14 @@ export default {
       value: "",
       dateValue: "",
       tongbiDate: "",
-      huanbiDate: ""
+      huanbiDate: "",
+      swiperOption: {
+        // some swiper options/callbacks
+        // 所有的参数同 swiper 官方 api 参数
+        // ...
+        autoplay:true,
+        loop:true
+      }
     };
   },
   methods: {
@@ -92,9 +126,12 @@ export default {
       let newArr = [];
       let newId = "";
       try {
-        if (!Array.isArray(ColHead)) throw "调用formatArr方法时传入的ColHead不是一个数组";
-        if (!Array.isArray(ColId)) throw "调用formatArr方法时传入的ColId不是一个数组";
-        if (ColHead.length !== ColId.length) throw "调用formatArr方法时传入的ColHead与ColId长度不相等";
+        if (!Array.isArray(ColHead))
+          throw "调用formatArr方法时传入的ColHead不是一个数组";
+        if (!Array.isArray(ColId))
+          throw "调用formatArr方法时传入的ColId不是一个数组";
+        if (ColHead.length !== ColId.length)
+          throw "调用formatArr方法时传入的ColHead与ColId长度不相等";
         ColHead.forEach((item, i) => {
           if (item === id) {
             newId = ColId[i];
